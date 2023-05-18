@@ -16,6 +16,7 @@
     <Copyright>All rights reserved</Copyright>
     <PackageTags>Asp-Net-Core,Security,Encrypt,Decrypt,SecurityEncryption</PackageTags>
     <PackageReleaseNotes>An easy and safe way to encrypt information</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/Mohammad-Abbasi2559/MAP.AspNetCore.Security</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
