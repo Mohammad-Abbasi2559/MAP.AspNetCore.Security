@@ -36,20 +36,19 @@ public static class SecurityEncryption
     /// </summary>
     /// <param name="source">your string (password, username, ...)</param>
     /// <param name="key">Encryption key</param>
-    /// <param name="mode">Specifies the block cipher mode to use for encryption</param>
     /// <returns>Encrypted string</returns>
     /// <exception cref="ArgumentNullException">source string = null</exception>
-    public static string Encrypt3DES(string source, string? key = null, CipherMode mode = CipherMode.ECB)
+    public static string Encrypt3DES(string source, string? key = null)
     {
         if (source == null || source == "") { throw new ArgumentNullException("source"); }
         if (key == null) { key = "L6j15"; }
-        using (TripleDESCryptoServiceProvider tripleDESCryptoService = new TripleDESCryptoServiceProvider())
+        using (var tripleDESCryptoService = TripleDES.Create())
         {
-            using (MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider())
+            using (var hashMD5Provider = MD5.Create())
             {
                 byte[] byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
                 tripleDESCryptoService.Key = byteHash;
-                tripleDESCryptoService.Mode = mode;
+                tripleDESCryptoService.Mode = CipherMode.ECB;
                 byte[] data = Encoding.Unicode.GetBytes(source);
                 return Convert.ToBase64String(tripleDESCryptoService.CreateEncryptor().TransformFinalBlock(data, 0, data.Length));
             }
@@ -61,20 +60,19 @@ public static class SecurityEncryption
     /// </summary>
     /// <param name="encrypt">Encrypted string</param>
     /// <param name="key">Encryption key</param>
-    /// <param name="mode">Specifies the block cipher mode to use for encryption</param>
     /// <returns>Decrypted string</returns>
     /// <exception cref="ArgumentNullException">encrypted string = null</exception>
-    public static string Decrypt3DES(string encrypt, string? key = null, CipherMode mode = CipherMode.ECB)
+    public static string Decrypt3DES(string encrypt, string? key = null)
     {
         if (encrypt == null || encrypt == "") { throw new ArgumentNullException("encrypt"); }
         if (key == null) { key = "L6j15"; }
-        using (TripleDESCryptoServiceProvider tripleDESCryptoService = new TripleDESCryptoServiceProvider())
+        using (var tripleDESCryptoService = TripleDES.Create())
         {
-            using (MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider())
+            using (var hashMD5Provider = MD5.Create())
             {
                 byte[] byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
                 tripleDESCryptoService.Key = byteHash;
-                tripleDESCryptoService.Mode = mode;
+                tripleDESCryptoService.Mode = CipherMode.ECB;
                 byte[] byteBuff = Convert.FromBase64String(encrypt);
                 return Encoding.Unicode.GetString(tripleDESCryptoService.CreateDecryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
             }

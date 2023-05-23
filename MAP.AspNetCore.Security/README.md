@@ -32,17 +32,14 @@ SecurityEncryption.SimpleEncrypt(Your_String)
 
 - `Your_String` is string you want to Encrypt
 - `Your_Key` is string pattern key you want
-- `Your_CipherMode_Enum` Specifies the block cipher mode to use for encryption
 ~~~
- SecurityEncryption.Encrypt3DES(Your_String, Your_Key, Your_CipherMode_Enum)
+ SecurityEncryption.Encrypt3DES(Your_String, Your_Key)
 ~~~
 
 - `Your_Encrypt` is string was Encrypted by **`Encrypt3DES`**
 - `Your_Key` is string pattern key you use in **`Encrypt3DES`**
-- `Your_CipherMode_Enum` Specifies the block cipher mode to use for encryption \
-**`CipherMode`** **It should be the one you used in Encrypt3DES**
 ~~~
- SecurityEncryption.Decrypt3DES(Your_Encrypt, Your_Key, Your_CipherMode_Enum)
+ SecurityEncryption.Decrypt3DES(Your_Encrypt, Your_Key)
 ~~~
 
 ### Contact me : 
